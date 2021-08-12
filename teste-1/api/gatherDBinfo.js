@@ -34,7 +34,6 @@ const getUserInfo = async () => {
       let rawModule = await mongoose.getModuleById(moduleID).then();
       module.id = rawModule.id;
       module.description = rawModule.name;
-      console.log("module aqui:", module);
       user.modules.push(module);
       module = {
         id: "",
@@ -43,7 +42,7 @@ const getUserInfo = async () => {
     }
     arrUsers.push(user);
   }
-  console.table(arrUsers);
+  // console.table(arrUsers);
   return arrUsers;
 };
 

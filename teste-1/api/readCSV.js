@@ -31,7 +31,7 @@ const readAllData = async () => {
   await readModules().then();
   await readModuleGroup().then();
   console.log("Dados lidos");
-  return data;
+  return true;
 };
 
 const readUsers = async () => {
