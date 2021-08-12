@@ -154,6 +154,51 @@ const addModuleGroup = async (data) => {
   // return moduleGroup;
 };
 
+const readAllUsers = async () => {
+  const arrUsers = await User.find().then();
+  return arrUsers;
+};
+
+const getRole = async (id) => {
+  const role = await Role.findOne({
+    id: id,
+  }).then();
+  return role.role_name;
+};
+
+const getModuleIdByClientId = async (id) => {
+  const arrModuleClientId = await ModuleClient.find({
+    client_id: id,
+  }).then();
+  if (arrModuleClientId.length >= 1) {
+    // console.log(`Modules for the client with id ${id}`);
+    // console.log(arrModuleClientId);
+  } else if (arrModuleClientId == undefined) {
+    arrModuleClientId = [];
+  }
+  return arrModuleClientId;
+};
+
+const getModuleIdByRoleId = async (id) => {
+  const arrModuleRoleId = await ModuleRole.find({
+    role_id: id,
+  }).then();
+  if (arrModuleRoleId.length >= 1) {
+    // console.log(`Modules for the Role with id ${id}`);
+    // console.log(arrModuleRoleId);
+  } else if (arrModuleRoleId == undefined) {
+    arrModuleRoleId = [];
+  }
+  return arrModuleRoleId;
+};
+
+const getModuleById = async (id) => {
+  const module = await Module.findOne({
+    id: id,
+  }).then();
+  return module;
+};
+
 module.exports = {
   addUsers: addUsers,
   addRoles: addRoles,
@@ -162,4 +207,9 @@ module.exports = {
   addModuleRole: addModuleRole,
   addModules: addModules,
   addModuleGroup: addModuleGroup,
+  readAllUsers: readAllUsers,
+  getRole: getRole,
+  getModuleIdByClientId: getModuleIdByClientId,
+  getModuleIdByRoleId: getModuleIdByRoleId,
+  getModuleById: getModuleById,
 };
