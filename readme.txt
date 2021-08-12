@@ -1,0 +1,1 @@
+Para executar o código, entrar no diretório "teste-1" e executar o comando "node server.js"
