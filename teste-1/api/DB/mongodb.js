@@ -6,25 +6,23 @@ const { moduleClientSchema } = require("./moduleClientSchema");
 const { moduleRoleSchema } = require("./moduleRoleSchema");
 const { modulesSchema } = require("./modulesSchema");
 const { moduleGroupSchema } = require("./moduleGroupSchema");
+const configDotEnv = require("../configDotEnv");
 
 mongoose.set("useFindAndModify", false);
 
 //Local MongoDB Database
-// mongoose.connect("mongodb://localhost:27017/delfosim", {
+// mongoose.connect(configDotEnv.MONGO_URL_LOCAL, {
 //   useNewUrlParser: true,
 //   useCreateIndex: true,
 //   useUnifiedTopology: true,
 // });
 
 //Remote MongoDB Database
-mongoose.connect(
-  "mongodb+srv://eu:tycbpOzsxq8BpLzl@noteslibrary.9qkuq.mongodb.net/delfosim-backend-test1?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect(configDotEnv.MONGO_URL_REMOTE, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+});
 
 const User = mongoose.model("users", userSchema);
 const Client = mongoose.model("clients", clientSchema);
