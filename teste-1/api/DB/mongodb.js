@@ -52,7 +52,7 @@ const addUsers = async (data) => {
       console.log(user);
     })
     .catch((error) => {
-      console.log("Error!", error);
+      console.log("Error creating User object!", error);
     });
   // return user;
 };
@@ -69,7 +69,7 @@ const addRoles = async (data) => {
       console.log(role);
     })
     .catch((error) => {
-      console.log("Error!", error);
+      console.log("Error creating Role object!", error);
     });
   // return role;
 };
@@ -86,7 +86,7 @@ const addClients = async (data) => {
       console.log(client);
     })
     .catch((error) => {
-      console.log("Error!", error);
+      console.log("Error creating Client object!", error);
     });
   // return client;
 };
@@ -103,7 +103,7 @@ const addModuleClient = async (data) => {
       console.log(moduleClient);
     })
     .catch((error) => {
-      console.log("Error!", error);
+      console.log("Error creating ModuleClient object!", error);
     });
   // return moduleClient;
 };
@@ -120,7 +120,7 @@ const addModuleRole = async (data) => {
       console.log(moduleRole);
     })
     .catch((error) => {
-      console.log("Error!", error);
+      console.log("Error creating ModuleRole object!", error);
     });
   // return moduleRole;
 };
@@ -139,7 +139,7 @@ const addModules = async (data) => {
       console.log(module);
     })
     .catch((error) => {
-      console.log("Error!", error);
+      console.log("Error creating Module object!", error);
     });
   // return module;
 };
@@ -158,7 +158,7 @@ const addModuleGroup = async (data) => {
       console.log(moduleGroup);
     })
     .catch((error) => {
-      console.log("Error!", error);
+      console.log("Error creating ModuleGroup object!", error);
     });
   // return moduleGroup;
 };
@@ -208,6 +208,30 @@ const getModuleById = async (id) => {
   return module;
 };
 
+const clearDB = async () => {
+  let collections = [
+    "users",
+    "clients",
+    "roles",
+    "moduleclients",
+    "moduleroles",
+    "modules",
+    "modulegroups",
+  ];
+  for (let collectionName of collections) {
+    try {
+      mongoose.connection.db.dropCollection(
+        collectionName,
+        (collectionName) => {
+          console.log(`${collectionName} was dropped`);
+        }
+      );
+    } catch {
+      console.log(`${collectionName} doesn't exist`);
+    }
+  }
+};
+
 module.exports = {
   addUsers: addUsers,
   addRoles: addRoles,
@@ -221,4 +245,5 @@ module.exports = {
   getModuleIdByClientId: getModuleIdByClientId,
   getModuleIdByRoleId: getModuleIdByRoleId,
   getModuleById: getModuleById,
+  clearDB: clearDB,
 };

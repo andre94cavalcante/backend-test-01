@@ -1,6 +1,7 @@
 const readCSV = require("./readCSV");
 const gatherDBinfo = require("./gatherDBinfo");
 const analisys = require("./analisys");
+const mongoose = require("./DB/mongodb");
 
 module.exports = (app) => {
   app.get("/", (req, res) => {
@@ -15,6 +16,11 @@ module.exports = (app) => {
     } else {
       res.send("Something went wrong");
     }
+  });
+
+  app.get("/clearDB", async (req, res) => {
+    await mongoose.clearDB();
+    res.send("The database is cleared");
   });
 
   app.get("/users", async (req, res) => {
